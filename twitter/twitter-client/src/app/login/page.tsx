@@ -1,11 +1,16 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
+import { SignInModal, CreateAccountModal } from "@/components/modals";
 
 export default function LoginPage() {
+  const [showSignInModal, setShowSignInModal] = useState(false);
+  const [showCreateAccountModal, setShowCreateAccountModal] = useState(false);
+
   return (
     <div className="flex min-h-screen bg-black">
-
-
       <div className="hidden lg:flex lg:w-[55%] items-center justify-center">
         <Image
           src="/x-logo.svg"
@@ -31,7 +36,7 @@ export default function LoginPage() {
         </div>
 
         <div className="max-w-95">
-          <h1 className="text-[64px] font-bold text-white leading-tight tracking-tight mb-12">
+          <h1 className="text-[55px] font-bold text-white leading-tight tracking-tight mb-10">
             Happening now
           </h1>
 
@@ -57,7 +62,10 @@ export default function LoginPage() {
             <div className="flex-1 h-px bg-[#2f3336]"></div>
           </div>
 
-          <button className="w-full bg-[#1d9bf0] text-white font-bold py-2.5 px-4 rounded-full hover:bg-[#1a8cd8] transition-colors mb-2">
+          <button
+            onClick={() => setShowCreateAccountModal(true)}
+            className="w-full bg-[#1d9bf0] text-white font-bold py-2.5 px-4 rounded-full hover:bg-[#1a8cd8] transition-colors mb-2"
+          >
             Create account
           </button>
 
@@ -81,10 +89,21 @@ export default function LoginPage() {
             Already have an account?
           </h3>
 
-          <button className="w-full border border-[#536471] text-[#1d9bf0] font-bold py-2.5 px-4 rounded-full hover:bg-[#1d9bf0]/10 transition-colors mb-3">
+          <button
+            onClick={() => setShowSignInModal(true)}
+            className="w-full border border-[#536471] text-[#1d9bf0] font-bold py-2.5 px-4 rounded-full hover:bg-[#1d9bf0]/10 transition-colors mb-3"
+          >
             Sign in
           </button>
 
+          <a
+            href="https://grok.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full border border-[#536471] text-white font-bold py-2.5 px-4 rounded-full hover:bg-[#1d9bf0]/10 transition-colors mb-3 flex items-center justify-center"
+          >
+            Get Grok
+          </a>
         </div>
       </div>
 
@@ -111,6 +130,16 @@ export default function LoginPage() {
           <span>&copy; 2026 X Corp.</span>
         </nav>
       </footer>
+
+      {/* Sign In Modal */}
+      {showSignInModal && (
+        <SignInModal onClose={() => setShowSignInModal(false)} />
+      )}
+
+      {/* Create Account Modal */}
+      {showCreateAccountModal && (
+        <CreateAccountModal onClose={() => setShowCreateAccountModal(false)} />
+      )}
     </div>
   );
 }
