@@ -53,10 +53,6 @@ input {
 }
 
 
-.tasks {
-
-}
-
 .task {
     display: flex;
     align-items: center;
